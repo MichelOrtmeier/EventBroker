@@ -5,14 +5,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBroker.EventBroker
+namespace EventBroker
 {
-    public class MethodSubscribtion
+    public class MethodSubscription
     {
         public MethodInfo MyMethodInfo { get; }
         public object Subscriber { get; }
 
-        public MethodSubscribtion(MethodInfo myMethodInfo, object subscriber)
+        public MethodSubscription(MethodInfo myMethodInfo, object subscriber)
         {
             MyMethodInfo = myMethodInfo;
             Subscriber = subscriber;
@@ -24,14 +24,14 @@ namespace EventBroker.EventBroker
         }
     }
 
-    internal class MethodSubscribtionComparer : IEqualityComparer<MethodSubscribtion>
+    internal class MethodSubscriptionComparer : IEqualityComparer<MethodSubscription>
     {
-        public bool Equals(MethodSubscribtion x, MethodSubscribtion y)
+        public bool Equals(MethodSubscription x, MethodSubscription y)
         {
             return x.MyMethodInfo == y.MyMethodInfo && x.Subscriber == y.Subscriber;
         }
 
-        public int GetHashCode(MethodSubscribtion obj)
+        public int GetHashCode(MethodSubscription obj)
         {
             return obj.GetHashCode();
         }

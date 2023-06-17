@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBroker.EventBroker
+namespace EventBroker
 {
     public abstract class EventAttribute : Attribute
     {

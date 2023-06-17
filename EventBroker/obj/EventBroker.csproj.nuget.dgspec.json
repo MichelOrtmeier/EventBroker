@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\EventBroker\\EventBroker\\EventBroker.csproj": {}
+    "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\EventBroker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\EventBroker\\EventBroker\\EventBroker.csproj": {
+    "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\EventBroker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\EventBroker\\EventBroker\\EventBroker.csproj",
+        "projectUniqueName": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\EventBroker.csproj",
         "projectName": "EventBroker",
-        "projectPath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\EventBroker\\EventBroker\\EventBroker.csproj",
+        "projectPath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\EventBroker.csproj",
         "packagesPath": "C:\\Users\\Morti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\EventBroker\\EventBroker\\obj\\",
+        "outputPath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Morti\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBroker.EventBroker
+namespace EventBroker
 {
     delegate void EditTopicMember(object myObject, MemberInfo member, EventAttribute attribute);
     public class Broker

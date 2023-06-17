@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zHDfmwetibGtia4BodcAlkjIwZJjvNBs7gXJtM+ApALq0tKN0+W38uaVzTM8zOqBgRIC83bJcJRo9L/3F+34/A==",
+  "dgSpecHash": "IT1675KyF2qAsW5kWdyH+jR7V6gmOV1ycLd7JXYiMHvCEb9GkIJGx+F/IBVciAf4Tp7wxh3lPm+lllpZzRC9Lg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\EventBroker\\EventBroker\\EventBroker.csproj",
+  "projectFilePath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\EventBroker.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -4,24 +4,24 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace EventBroker.EventBroker
+namespace EventBroker
 {
     public class Topic
     {
         public string TopicName { get; }
 
-        private List<MethodSubscribtion> methods;
+        private List<MethodSubscription> methods;
 
         public Topic(string topicName)
         {
             TopicName = topicName;
-            methods = new List<MethodSubscribtion>();
+            methods = new List<MethodSubscription>();
         }
 
         public void AddMethod(MethodInfo method, object subscriber)
         {
-            MethodSubscribtion newSubscription = new MethodSubscribtion(method, subscriber);
-            if (!methods.Contains(newSubscription, new MethodSubscribtionComparer()))
+            MethodSubscription newSubscription = new MethodSubscription(method, subscriber);
+            if (!methods.Contains(newSubscription, new MethodSubscriptionComparer()))
             {
                 methods.Add(newSubscription);
             }
@@ -29,7 +29,7 @@ namespace EventBroker.EventBroker
 
         public void RemoveSubscriber(object subscriber)
         {
-            MethodSubscribtion[] matches = methods.Where((method) => method.Subscriber.Equals(subscriber)).ToArray();
+            MethodSubscription[] matches = methods.Where((method) => method.Subscriber.Equals(subscriber)).ToArray();
             for (int i = matches.Count() - 1; i >= 0; i--)
             {
                 methods.Remove(matches.ElementAt(i));
@@ -41,7 +41,7 @@ namespace EventBroker.EventBroker
             dynamic e = args;
             for (int i = methods.Count() - 1; i >= 0; i--)
             {
-                MethodSubscribtion method = methods[i];
+                MethodSubscription method = methods[i];
                 try
                 {
                     ParameterInfo[] parameters = method.MyMethodInfo.GetParameters();

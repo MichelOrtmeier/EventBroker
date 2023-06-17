@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBroker.EventBroker
+namespace EventBroker
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class EventSubscriptionAttribute : EventAttribute
