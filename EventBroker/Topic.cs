@@ -30,7 +30,7 @@ namespace EventBroker
         public void RemoveMethodSubscriptionsOfSubscriber(object subscriber)
         {
             MethodSubscription[] matches = subscribingMethods.Where((method) => method.Subscriber.Equals(subscriber)).ToArray();
-            for (int i = matches.Count() - 1; i >= 0; i--)
+            for (int i = matches.Length - 1; i >= 0; i--)
             {
                 subscribingMethods.Remove(matches.ElementAt(i));
             }
@@ -39,13 +39,13 @@ namespace EventBroker
         public void InvokeSubscribingMethods(object sender, EventArgs args)
         {
             dynamic e = args;
-            for (int i = subscribingMethods.Count() - 1; i >= 0; i--)
+            for (int i = subscribingMethods.Count - 1; i >= 0; i--)
             {
                 MethodSubscription method = subscribingMethods[i];
                 try
                 {
                     ParameterInfo[] parameters = method.MyMethodInfo.GetParameters();
-                    if (parameters.Count() == 2
+                    if (parameters.Length == 2
                         && parameters.Count((param) => param.ParameterType == typeof(object)) == 1
                         && parameters.Count((param) => param.ParameterType == args.GetType()) == 1)
                     {
