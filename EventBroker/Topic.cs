@@ -10,38 +10,38 @@ namespace EventBroker
     {
         public string TopicName { get; }
 
-        private List<MethodSubscription> methods;
+        private List<MethodSubscription> subscribingMethods;
 
         public Topic(string topicName)
         {
             TopicName = topicName;
-            methods = new List<MethodSubscription>();
+            subscribingMethods = new List<MethodSubscription>();
         }
 
-        public void AddMethod(MethodInfo method, object subscriber)
+        public void AddMethodSubscription(MethodInfo method, object subscriber)
         {
-            MethodSubscription newSubscription = new MethodSubscription(method, subscriber);
-            if (!methods.Contains(newSubscription, new MethodSubscriptionComparer()))
+            MethodSubscription newSubscribingMethod = new MethodSubscription(method, subscriber);
+            if (!subscribingMethods.Contains(newSubscribingMethod, new MethodSubscriptionComparer()))
             {
-                methods.Add(newSubscription);
+                subscribingMethods.Add(newSubscribingMethod);
             }
         }
 
-        public void RemoveSubscriber(object subscriber)
+        public void RemoveMethodSubscriptionsOfSubscriber(object subscriber)
         {
-            MethodSubscription[] matches = methods.Where((method) => method.Subscriber.Equals(subscriber)).ToArray();
+            MethodSubscription[] matches = subscribingMethods.Where((method) => method.Subscriber.Equals(subscriber)).ToArray();
             for (int i = matches.Count() - 1; i >= 0; i--)
             {
-                methods.Remove(matches.ElementAt(i));
+                subscribingMethods.Remove(matches.ElementAt(i));
             }
         }
 
-        public void CallMethods(object sender, EventArgs args)
+        public void InvokeSubscribingMethods(object sender, EventArgs args)
         {
             dynamic e = args;
-            for (int i = methods.Count() - 1; i >= 0; i--)
+            for (int i = subscribingMethods.Count() - 1; i >= 0; i--)
             {
-                MethodSubscription method = methods[i];
+                MethodSubscription method = subscribingMethods[i];
                 try
                 {
                     ParameterInfo[] parameters = method.MyMethodInfo.GetParameters();
@@ -59,7 +59,7 @@ namespace EventBroker
                     {
                         Debug.Write("While calling a subscribing method, something went wrong: " +
                             "\n The method did not match the correct parameter specifications.");
-                        methods.Remove(method);
+                        subscribingMethods.Remove(method);
                     }
                 }
                 catch (Exception ex) when (ex is TargetException ||
@@ -72,14 +72,14 @@ namespace EventBroker
                 {
                     Debug.Write("While calling a subscribing method, something went wrong: ");
                     Debug.WriteLine(ex.ToString());
-                    methods.Remove(method);
+                    subscribingMethods.Remove(method);
                 }
             }
         }
 
-        public int GetSubscriberLength()
+        public int CountSubscribingMethods()
         {
-            return methods.Count;
+            return subscribingMethods.Count;
         }
     }
 }

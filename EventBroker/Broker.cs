@@ -73,7 +73,7 @@ namespace EventBroker
             switch (member)
             {
                 case MethodInfo myMethod:
-                    topic.AddMethod(myMethod, myObject);
+                    topic.AddMethodSubscription(myMethod, myObject);
                     break;
                 case EventInfo myEvent:
                     //MethodInfo method = GetType().GetMethod(nameof(OnEventIsPublished) ,BindingFlags.NonPublic | BindingFlags.Instance);
@@ -89,8 +89,8 @@ namespace EventBroker
             Topic topic;
             if (member is MethodInfo method && topics.TryGetValue(attribute.TopicName, out topic))
             {
-                topic.RemoveSubscriber(myObject);
-                if (topic.GetSubscriberLength() == 0)
+                topic.RemoveMethodSubscriptionsOfSubscriber(myObject);
+                if (topic.CountSubscribingMethods() == 0)
                     topics.Remove(attribute.TopicName);
             }
         }
@@ -103,7 +103,7 @@ namespace EventBroker
             Topic topic;
             if (topics.TryGetValue(topicName, out topic))
             {
-                topic.CallMethods(sender, args);
+                topic.InvokeSubscribingMethods(sender, args);
             }
         }
         #endregion
