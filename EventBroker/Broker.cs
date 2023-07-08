@@ -103,7 +103,7 @@ namespace EventBroker
             Topic topic;
             if (topics.TryGetValue(topicName, out topic))
             {
-                topic.InvokeSubscribingMethods(sender, args);
+                topic.InvokeSubscribingMethodsWithEventParameters(sender, args);
             }
         }
         #endregion
