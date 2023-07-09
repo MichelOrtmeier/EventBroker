@@ -9,62 +9,58 @@ namespace EventBroker
 {
     public class MethodSubscription
     {
-        public MethodInfo MyMethodInfo { get; }
+        public MethodInfo SubscribingMethod { get; }
         public object Subscriber { get; }
 
-        public MethodSubscription(MethodInfo myMethodInfo, object subscriber)
+        public MethodSubscription(MethodInfo subscribingMethod, object subscriber)
         {
-            MyMethodInfo = myMethodInfo;
+            SubscribingMethod = subscribingMethod;
             Subscriber = subscriber;
         }
 
         public void InvokeMethodWithParameters(object[] parameters)
         {
-            if (MethodHasEqualParameterTypes(GetTypesFromObjects(parameters)))
+            if (MyMethodHasEqualParameterTypesTo(GetTypesFromObjects(parameters)))
             {
                 InvokeMethod(parameters);
             }
-            else if (!MethodHasParameters())
+            else if (!MyMethodHasParameters())
             {
                 InvokeMethod(null);
             }
             else
             {
-                ThrowUnmatchingParametersException();
+                throw new ArgumentException($"The compared types of '{SubscribingMethod.Name}'" +
+                $"did neither match the given parameters nor had no required parameters");
             }
         }
 
-        private void ThrowUnmatchingParametersException()
+        private bool MyMethodHasParameters()
         {
-            throw new ArgumentException($"The comparedTypes of '{MyMethodInfo.Name}'" +
-                                $"did neither match the given EventArgs subtype and the object sender nor " +
-                                $"no comparedTypes.");
+            return SubscribingMethod.GetParameters().Length > 0;
         }
-
-        private bool MethodHasParameters()
+        
+        private bool MyMethodHasEqualParameterTypesTo(IEnumerable<Type> comparedTypes)
         {
-            return MyMethodInfo.GetParameters().Length > 0;
-        }
-
-        private bool MethodHasEqualParameterTypes(Type[] comparedTypes)
-        {
-            Type[] myParameterTypes = GetTypesFromParameters(MyMethodInfo.GetParameters());
+            IEnumerable<Type> myParameterTypes = GetTypesFromParameters(SubscribingMethod.GetParameters());
             return TypesAreEqual(myParameterTypes, comparedTypes);
         }
 
-        private Type[] GetTypesFromObjects(object[] objects)
+        private IEnumerable<Type> GetTypesFromObjects(IEnumerable<object> objects)
         {
-            return objects.Select((obj) => obj.GetType()).ToArray();
+            return objects.Select((obj) => obj.GetType());
         }
 
-        private Type[] GetTypesFromParameters(ParameterInfo[] parameters)
+        private IEnumerable<Type> GetTypesFromParameters(IEnumerable<ParameterInfo> parameters)
         {
-            return parameters.Select((parameter) => parameter.ParameterType).ToArray();
+            return parameters.Select((parameter) => parameter.ParameterType);
         }
 
-        private bool TypesAreEqual(Type[] types, Type[] comparedTypes)
+        private bool TypesAreEqual(IEnumerable<Type> types, IEnumerable<Type> comparedTypes)
         {
-            return OrderEnumerableByHashCode(types).SequenceEqual(OrderEnumerableByHashCode(comparedTypes));
+            IEnumerable<Type> orderedTypes = OrderEnumerableByHashCode(types);
+            IEnumerable<Type> comparedOrderedTypes = OrderEnumerableByHashCode(comparedTypes);
+            return orderedTypes.SequenceEqual(comparedOrderedTypes);
         }
         
         private IEnumerable<T> OrderEnumerableByHashCode<T>(IEnumerable<T> enumerable)
@@ -72,9 +68,9 @@ namespace EventBroker
             return enumerable.OrderBy((obj) => obj?.GetHashCode() ?? 0);
         }
 
-        private void InvokeMethod(object?[]? parameters)
+        private void InvokeMethod(object[] parameters)
         {
-            MyMethodInfo.Invoke(Subscriber, parameters);
+            SubscribingMethod.Invoke(Subscriber, parameters);
         }
     }
 
@@ -82,7 +78,7 @@ namespace EventBroker
     {
         public bool Equals(MethodSubscription x, MethodSubscription y)
         {
-            return x.MyMethodInfo == y.MyMethodInfo && x.Subscriber == y.Subscriber;
+            return x.SubscribingMethod == y.SubscribingMethod && x.Subscriber == y.Subscriber;
         }
 
         public int GetHashCode(MethodSubscription obj)

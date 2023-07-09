@@ -52,7 +52,7 @@ namespace EventBroker
             {
                 method.InvokeMethodWithParameters(parameters);
             }
-            catch (Exception ex) when (ExceptionIsMethodInvocationException(ex))
+            catch (Exception ex) when (IsExceptionCausedByMethodInvocation(ex))
             {
                 CatchFailedMethodInvocation(method, ex);
             }
@@ -65,7 +65,7 @@ namespace EventBroker
             subscribingMethods.Remove(method);
         }
 
-        private static bool ExceptionIsMethodInvocationException(Exception ex)
+        private static bool IsExceptionCausedByMethodInvocation(Exception ex)
         {
             return ex is TargetException ||
                    ex is ArgumentException ||
@@ -75,6 +75,7 @@ namespace EventBroker
                    ex is InvalidOperationException ||
                    ex is NotSupportedException;
         }
+
         public int CountSubscribingMethods()
         {
             return subscribingMethods.Count;
