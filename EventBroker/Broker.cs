@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using EventBroker.EventAttributes;
 
 namespace EventBroker
 {

@@ -21,18 +21,23 @@ namespace EventBroker
 
         public void InvokeMethodWithParameters(object[] parameters)
         {
-            if (MethodHasEqualParameterTypesTo(parameters.GetObjectTypes()))
-            {
-                InvokeMethod(parameters);
-            }
-            else if (!MethodHasParameters())
+            if (!MethodHasParameters())
             {
                 InvokeMethod(null);
             }
+            else if (MethodHasEqualParameterTypesTo(parameters.GetObjectTypes()))
+            {
+                InvokeMethod(parameters);
+            }
             else
             {
+                ThrowExceptionBecauseOfUnsuitableParameters();
+            }
+
+            void ThrowExceptionBecauseOfUnsuitableParameters()
+            {
                 throw new ArgumentException($"The compared types of '{SubscribingMethod.Name}'" +
-                $"did neither match the given parameters nor had no required parameters");
+                                $"did neither match the given parameters nor had no required parameters");
             }
         }
 
@@ -53,7 +58,7 @@ namespace EventBroker
         }
     }
 
-    internal class MethodSubscriptionComparer : IEqualityComparer<MethodSubscription>
+    public class MethodSubscriptionComparer : IEqualityComparer<MethodSubscription>
     {
         public bool Equals(MethodSubscription x, MethodSubscription y)
         {
