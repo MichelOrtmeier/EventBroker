@@ -20,11 +20,11 @@ namespace EventBroker
 
         public void InvokeMethodWithParameters(object[] parameters)
         {
-            if (MyMethodHasEqualParameterTypesTo(GetTypesFromObjects(parameters)))
+            if (MethodHasEqualParameterTypesTo(GetTypesFromObjects(parameters)))
             {
                 InvokeMethod(parameters);
             }
-            else if (!MyMethodHasParameters())
+            else if (!MethodHasParameters())
             {
                 InvokeMethod(null);
             }
@@ -35,42 +35,42 @@ namespace EventBroker
             }
         }
 
-        private bool MyMethodHasParameters()
+        private bool MethodHasParameters()
         {
             return SubscribingMethod.GetParameters().Length > 0;
         }
         
-        private bool MyMethodHasEqualParameterTypesTo(IEnumerable<Type> comparedTypes)
+        private bool MethodHasEqualParameterTypesTo(IEnumerable<Type> comparedTypes)
         {
             IEnumerable<Type> myParameterTypes = GetTypesFromParameters(SubscribingMethod.GetParameters());
             return TypesAreEqual(myParameterTypes, comparedTypes);
         }
 
-        private IEnumerable<Type> GetTypesFromObjects(IEnumerable<object> objects)
+        private void InvokeMethod(object[] parameters)
+        {
+            SubscribingMethod.Invoke(Subscriber, parameters);
+        }
+
+        private static IEnumerable<Type> GetTypesFromObjects(IEnumerable<object> objects)
         {
             return objects.Select((obj) => obj.GetType());
         }
 
-        private IEnumerable<Type> GetTypesFromParameters(IEnumerable<ParameterInfo> parameters)
+        private static IEnumerable<Type> GetTypesFromParameters(IEnumerable<ParameterInfo> parameters)
         {
             return parameters.Select((parameter) => parameter.ParameterType);
         }
 
-        private bool TypesAreEqual(IEnumerable<Type> types, IEnumerable<Type> comparedTypes)
+        private static bool TypesAreEqual(IEnumerable<Type> types, IEnumerable<Type> comparedTypes)
         {
             IEnumerable<Type> orderedTypes = OrderEnumerableByHashCode(types);
             IEnumerable<Type> comparedOrderedTypes = OrderEnumerableByHashCode(comparedTypes);
             return orderedTypes.SequenceEqual(comparedOrderedTypes);
         }
         
-        private IEnumerable<T> OrderEnumerableByHashCode<T>(IEnumerable<T> enumerable)
+        private static IEnumerable<T> OrderEnumerableByHashCode<T>(IEnumerable<T> enumerable)
         {
             return enumerable.OrderBy((obj) => obj?.GetHashCode() ?? 0);
-        }
-
-        private void InvokeMethod(object[] parameters)
-        {
-            SubscribingMethod.Invoke(Subscriber, parameters);
         }
     }
 
