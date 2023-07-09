@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBroker
+namespace EventBroker.EventAttributes
 {
     [AttributeUsage(AttributeTargets.Event, AllowMultiple = true)]
     public class EventPublicationAttribute : EventAttribute
