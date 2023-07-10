@@ -52,17 +52,4 @@ namespace EventBroker
             SubscribingMethod.Invoke(Subscriber, parameters);
         }
     }
-
-    public class MethodSubscriptionComparer : IEqualityComparer<MethodSubscription>
-    {
-        public bool Equals(MethodSubscription x, MethodSubscription y)
-        {
-            return x.SubscribingMethod == y.SubscribingMethod && x.Subscriber == y.Subscriber;
-        }
-
-        public int GetHashCode(MethodSubscription obj)
-        {
-            return obj.GetHashCode();
-        }
-    }
 }
