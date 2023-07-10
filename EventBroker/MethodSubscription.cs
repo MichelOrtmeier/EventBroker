@@ -4,9 +4,9 @@ using System.Reflection;
 namespace EventBroker
 {
     public class MethodSubscription
-    {
-        public MethodInfo SubscribingMethod { get; }
+    { 
         public object Subscriber { get; }
+        public MethodInfo SubscribingMethod { get; }
 
         public MethodSubscription(MethodInfo subscribingMethod, object subscriber)
         {
@@ -20,31 +20,31 @@ namespace EventBroker
             {
                 InvokeMethod(null);
             }
-            else if (MethodHasEqualParameterTypesTo(parameters.GetObjectTypes()))
+            else if (MethodHasEqualParameterTypesTo(parameters))
             {
                 InvokeMethod(parameters);
             }
             else
-            {
-                ThrowExceptionBecauseOfUnsuitableParameters();
-            }
-
-            void ThrowExceptionBecauseOfUnsuitableParameters()
             {
                 throw new ArgumentException($"The compared types of '{SubscribingMethod.Name}'" +
                                 $"did neither match the given parameters nor had no required parameters");
             }
         }
 
+        private bool MethodHasEqualParameterTypesTo(IEnumerable<object> passedObjects)
+        {
+            ParameterInfo[] requiredParameters = SubscribingMethod.GetParameters()
+                                                                  .ToArray();
+            Type[] requiredTypes = requiredParameters.GetParameterTypes()
+                                                     .ToArray();
+            Type[] passedTypes = passedObjects.GetObjectTypes()
+                                              .ToArray();
+            return requiredTypes.ContentEqual(passedTypes);
+        }
+
         private bool MethodHasParameters()
         {
             return SubscribingMethod.GetParameters().Length > 0;
-        }
-        
-        private bool MethodHasEqualParameterTypesTo(IEnumerable<Type> comparedTypes)
-        {
-            IEnumerable<Type> myParameterTypes = SubscribingMethod.GetParameters().GetParameterTypes();
-            return myParameterTypes.ContentEqual(comparedTypes);
         }
 
         private void InvokeMethod(object?[]? parameters)
