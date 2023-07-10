@@ -31,20 +31,26 @@ namespace EventBroker
             }
         }
 
+        private bool MethodHasParameters()
+        {
+            return SubscribingMethod.GetParameters().Length > 0;
+        }
+
         private bool MethodHasEqualParameterTypesTo(IEnumerable<object> passedObjects)
         {
-            ParameterInfo[] requiredParameters = SubscribingMethod.GetParameters()
-                                                                  .ToArray();
-            Type[] requiredTypes = requiredParameters.GetParameterTypes()
-                                                     .ToArray();
+            Type[] requiredTypes = GetMethodParameterTypes().ToArray();
             Type[] passedTypes = passedObjects.GetObjectTypes()
                                               .ToArray();
             return requiredTypes.ContentEqual(passedTypes);
         }
 
-        private bool MethodHasParameters()
+        private IEnumerable<Type> GetMethodParameterTypes()
         {
-            return SubscribingMethod.GetParameters().Length > 0;
+            ParameterInfo[] methodParameters = SubscribingMethod.GetParameters()
+                                                      .ToArray();
+            Type[] methodParameterTypes = methodParameters.GetParameterTypes()
+                                                     .ToArray();
+            return methodParameterTypes;
         }
 
         private void InvokeMethod(object?[]? parameters)

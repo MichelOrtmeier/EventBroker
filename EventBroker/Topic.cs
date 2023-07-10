@@ -7,7 +7,7 @@ namespace EventBroker
     {
         public string TopicName { get; }
 
-        private List<MethodSubscription> subscribingMethods;
+        private List<MethodSubscription> subscribingMethods;//should be inherited
 
         public Topic(string topicName)
         {
