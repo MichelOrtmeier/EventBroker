@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
+using EventBroker.EventAttributes;
 
 namespace EventBroker
 {
     delegate void EditTopicMember(object myObject, MemberInfo member, EventAttribute attribute);
     public class Broker
     {
-        Dictionary<string, Topic> topics = new Dictionary<string, Topic>();
+        Dictionary<string, EventTopic> topics = new Dictionary<string, EventTopic>();
 
         #region RegisterMethods
         public void Register(object myObject)
@@ -36,12 +37,12 @@ namespace EventBroker
             }
         }
 
-        private Topic GetCreateTopic(EventAttribute attribute)
+        private EventTopic GetCreateTopic(EventAttribute attribute)
         {
-            Topic topic;
+            EventTopic topic;
             if (!topics.ContainsKey(attribute.TopicName))
             {
-                topic = new Topic(attribute.TopicName);
+                topic = new EventTopic(attribute.TopicName);
                 topics.Add(attribute.TopicName, topic);
             }
             else
@@ -62,11 +63,11 @@ namespace EventBroker
         #region EditingOptions
         private void AddTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
         {
-            Topic topic = GetCreateTopic(attribute);
+            EventTopic topic = GetCreateTopic(attribute);
             switch (member)
             {
                 case MethodInfo myMethod:
-                    topic.AddMethodSubscription(myMethod, myObject);
+                    topic.AddSubscription(myMethod, myObject);
                     break;
                 case EventInfo myEvent:
                     //MethodInfo method = GetType().GetMethod(nameof(OnEventIsPublished) ,BindingFlags.NonPublic | BindingFlags.Instance);
@@ -79,11 +80,11 @@ namespace EventBroker
 
         private void RemoveTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
         {
-            Topic topic;
+            EventTopic topic;
             if (member is MethodInfo method && topics.TryGetValue(attribute.TopicName, out topic))
             {
-                topic.RemoveMethodSubscriptionsOfSubscriber(myObject);
-                if (topic.CountSubscribingMethods() == 0)
+                topic.RemoveAllSubscriptionsOf(myObject);
+                if (topic.CountSubscriptions() == 0)
                     topics.Remove(attribute.TopicName);
             }
         }
@@ -93,10 +94,10 @@ namespace EventBroker
         #region EventRaisedMethods
         private void OnEventIsPublished(object sender, EventArgs args, string topicName)
         {
-            Topic topic;
+            EventTopic topic;
             if (topics.TryGetValue(topicName, out topic))
             {
-                topic.InvokeSubscribingMethodsWithEventParameters(sender, args);
+                topic.Fire(sender, args);
             }
         }
         #endregion
