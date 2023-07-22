@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 
 namespace EventBroker
-{
+{ 
     public class Topic
     {
         public string TopicName { get; }
