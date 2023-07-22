@@ -33,6 +33,11 @@ namespace EventBroker
             }
         }
 
+        public int CountSubscribingMethods()
+        {
+            return subscribingMethods.Count;
+        }
+
         public void InvokeSubscribingMethodsWithEventParameters(object sender, EventArgs args)
         {
             dynamic dynamicallyCastedArgs = args;
@@ -55,13 +60,6 @@ namespace EventBroker
             }
         }
 
-        private void CatchFailedMethodInvocation(MethodSubscription method, Exception ex)
-        {
-            Debug.Write("While calling a subscribing method, something went wrong: ");
-            Debug.WriteLine(ex.ToString());
-            subscribingMethods.Remove(method);
-        }
-
         private static bool IsExceptionCausedByMethodInvocation(Exception ex)
         {
             return ex is TargetException ||
@@ -73,9 +71,11 @@ namespace EventBroker
                    ex is NotSupportedException;
         }
 
-        public int CountSubscribingMethods()
+        private void CatchFailedMethodInvocation(MethodSubscription method, Exception ex)
         {
-            return subscribingMethods.Count;
+            Debug.Write("While calling a subscribing method, something went wrong: ");
+            Debug.WriteLine(ex.ToString());
+            subscribingMethods.Remove(method);
         }
     }
 }
