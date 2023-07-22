@@ -22,3 +22,11 @@ C:\Users\Morti\Programmieren\C#\Anwendungen\Konsole\EventBroker\EventBroker\obj\
 C:\Users\Morti\Programmieren\C#\Anwendungen\Konsole\EventBroker\EventBroker\obj\Debug\net6.0\refint\EventBroker.dll
 C:\Users\Morti\Programmieren\C#\Anwendungen\Konsole\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.pdb
 C:\Users\Morti\Programmieren\C#\Anwendungen\Konsole\EventBroker\EventBroker\obj\Debug\net6.0\ref\EventBroker.dll
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.csproj.AssemblyReference.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.AssemblyInfoInputs.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.AssemblyInfo.cs
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.csproj.CoreCompileInputs.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.dll
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\refint\EventBroker.dll
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker\obj\Debug\net6.0\EventBroker.pdb

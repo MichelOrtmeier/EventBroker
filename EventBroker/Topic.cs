@@ -10,76 +10,75 @@ namespace EventBroker
     {
         public string TopicName { get; }
 
-        private List<MethodSubscription> methods;
+        private List<MethodSubscription> subscribingMethods;
 
         public Topic(string topicName)
         {
             TopicName = topicName;
-            methods = new List<MethodSubscription>();
+            subscribingMethods = new List<MethodSubscription>();
         }
 
-        public void AddMethod(MethodInfo method, object subscriber)
+        public void AddMethodSubscription(MethodInfo method, object subscriber)
         {
-            MethodSubscription newSubscription = new MethodSubscription(method, subscriber);
-            if (!methods.Contains(newSubscription, new MethodSubscriptionComparer()))
+            MethodSubscription newSubscribingMethod = new MethodSubscription(method, subscriber);
+            if (!subscribingMethods.Contains(newSubscribingMethod, new MethodSubscriptionComparer()))
             {
-                methods.Add(newSubscription);
+                subscribingMethods.Add(newSubscribingMethod);
             }
         }
 
-        public void RemoveSubscriber(object subscriber)
+        public void RemoveMethodSubscriptionsOfSubscriber(object subscriber)
         {
-            MethodSubscription[] matches = methods.Where((method) => method.Subscriber.Equals(subscriber)).ToArray();
-            for (int i = matches.Count() - 1; i >= 0; i--)
+            MethodSubscription[] matches = subscribingMethods.Where((method) => method.Subscriber.Equals(subscriber)).ToArray();
+            for (int i = matches.Length - 1; i >= 0; i--)
             {
-                methods.Remove(matches.ElementAt(i));
+                subscribingMethods.Remove(matches.ElementAt(i));
             }
         }
 
-        public void CallMethods(object sender, EventArgs args)
+        public void InvokeSubscribingMethodsWithEventParameters(object sender, EventArgs args)
         {
-            dynamic e = args;
-            for (int i = methods.Count() - 1; i >= 0; i--)
+            dynamic dynamicallyCastedArgs = args;
+            object[] parameters = new object[] {sender, dynamicallyCastedArgs};
+            for (int i = subscribingMethods.Count - 1; i >= 0; i--)
             {
-                MethodSubscription method = methods[i];
-                try
-                {
-                    ParameterInfo[] parameters = method.MyMethodInfo.GetParameters();
-                    if (parameters.Count() == 2
-                        && parameters.Count((param) => param.ParameterType == typeof(object)) == 1
-                        && parameters.Count((param) => param.ParameterType == args.GetType()) == 1)
-                    {
-                        method.MyMethodInfo.Invoke(method.Subscriber, new object[] { sender, e });
-                    }
-                    else if (method.MyMethodInfo.GetParameters().Length == 0)
-                    {
-                        method.MyMethodInfo.Invoke(method.Subscriber, null);
-                    }
-                    else
-                    {
-                        Debug.Write("While calling a subscribing method, something went wrong: " +
-                            "\n The method did not match the correct parameter specifications.");
-                        methods.Remove(method);
-                    }
-                }
-                catch (Exception ex) when (ex is TargetException ||
-                                            ex is ArgumentException ||
-                                            ex is TargetInvocationException ||
-                                            ex is TargetParameterCountException ||
-                                            ex is MethodAccessException ||
-                                            ex is InvalidOperationException ||
-                                            ex is NotSupportedException)
-                {
-                    Debug.Write("While calling a subscribing method, something went wrong: ");
-                    Debug.WriteLine(ex.ToString());
-                    methods.Remove(method);
-                }
+                InvokeSubscribingMethod(parameters, subscribingMethods[i]);
             }
         }
 
-        public int GetSubscriberLength()
+        private void InvokeSubscribingMethod(object[] parameters, MethodSubscription method)
         {
-            return methods.Count;
+            try
+            {
+                method.InvokeMethodWithParameters(parameters);
+            }
+            catch (Exception ex) when (IsExceptionCausedByMethodInvocation(ex))
+            {
+                CatchFailedMethodInvocation(method, ex);
+            }
+        }
+
+        private void CatchFailedMethodInvocation(MethodSubscription method, Exception ex)
+        {
+            Debug.Write("While calling a subscribing method, something went wrong: ");
+            Debug.WriteLine(ex.ToString());
+            subscribingMethods.Remove(method);
+        }
+
+        private static bool IsExceptionCausedByMethodInvocation(Exception ex)
+        {
+            return ex is TargetException ||
+                   ex is ArgumentException ||
+                   ex is TargetInvocationException ||
+                   ex is TargetParameterCountException ||
+                   ex is MethodAccessException ||
+                   ex is InvalidOperationException ||
+                   ex is NotSupportedException;
+        }
+
+        public int CountSubscribingMethods()
+        {
+            return subscribingMethods.Count;
         }
     }
 }
