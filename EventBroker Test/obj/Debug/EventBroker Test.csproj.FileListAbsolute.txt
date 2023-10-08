@@ -1,0 +1,8 @@
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\bin\Debug\EventBroker Test.exe.config
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\bin\Debug\EventBroker Test.exe
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\bin\Debug\EventBroker Test.pdb
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\obj\Debug\EventBroker Test.csproj.AssemblyReference.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\obj\Debug\EventBroker Test.csproj.SuggestedBindingRedirects.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\obj\Debug\EventBroker Test.csproj.CoreCompileInputs.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\obj\Debug\EventBroker Test.exe
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker\EventBroker Test\obj\Debug\EventBroker Test.pdb
