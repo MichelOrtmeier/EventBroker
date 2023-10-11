@@ -8,27 +8,31 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Morti\\.nuget\\packages\\": {}
+    "C:\\Users\\morti\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\EventBroker.csproj",
+      "projectUniqueName": "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\EventBroker.csproj",
       "projectName": "EventBroker",
-      "projectPath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\EventBroker.csproj",
-      "packagesPath": "C:\\Users\\Morti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\obj\\",
+      "projectPath": "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\EventBroker.csproj",
+      "packagesPath": "C:\\Users\\morti\\.nuget\\packages\\",
+      "outputPath": "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Morti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\morti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
       },
       "frameworks": {
         "net6.0": {
@@ -61,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

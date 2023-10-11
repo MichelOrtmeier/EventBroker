@@ -15,12 +15,33 @@ namespace EventBroker.Extensions
             return method.GetParameters().Length > 0;
         }
 
-        public static bool HasEqualParameterTypesTo(this MethodInfo method, IEnumerable<object> passedObjects)
+        public static bool ArePassableToMethod(this IEnumerable<object> passedObjects, MethodInfo receiver)
         {
-            Type[] requiredTypes = method.GetMethodParameterTypes().ToArray();
-            Type[] passedTypes = passedObjects.GetObjectTypes()
-                                              .ToArray();
-            return requiredTypes.ContentEqual(passedTypes);
+            IEnumerable<Type> requiredTypes = receiver.GetMethodParameterTypes();
+            IEnumerable<Type> passedTypes = passedObjects.GetObjectTypes();
+            return passedTypes.AreLengthEqualAndPassableTo(requiredTypes);
+        }
+
+        public static bool AreLengthEqualAndPassableTo(this IEnumerable<Type> passedTypes, IEnumerable<Type> requiredTypes)
+        {
+            if (passedTypes.Count() == requiredTypes.Count())
+            {
+                return passedTypes.ArePassableTo(requiredTypes);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static bool ArePassableTo(this IEnumerable<Type> passedTypes, IEnumerable<Type> requiredTypes)
+        {
+            bool passable = true;
+            for (int i = 0; i < requiredTypes.Count(); i++)
+            {
+                passable = passable && requiredTypes.ElementAt(i).IsAssignableFrom(passedTypes.ElementAt(i));
+            }
+            return passable;
         }
 
         public static IEnumerable<Type> GetMethodParameterTypes(this MethodInfo method)

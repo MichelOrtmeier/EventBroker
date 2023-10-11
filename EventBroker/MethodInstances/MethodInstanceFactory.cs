@@ -42,7 +42,7 @@ namespace EventBroker.MethodInstances
 
             public override void Invoke(object[] parameters)
             {
-                if (Method.HasEqualParameterTypesTo(parameters))
+                if (parameters.ArePassableToMethod(Method))
                 {
                     Method.Invoke(Instance, parameters);
                 }
