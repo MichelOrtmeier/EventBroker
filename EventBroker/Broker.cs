@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
 using EventBroker.EventAttributes;
+using EventBroker.Extensions;
 
 namespace EventBroker
 {
     delegate void EditTopicMember(object myObject, MemberInfo member, EventAttribute attribute);
     public class Broker
     {
-        Dictionary<string, EventTopic> topics = new Dictionary<string, EventTopic>();
+        Dictionary<string, EventTopic> topicNameTopicPairs = new Dictionary<string, EventTopic>();
 
         #region RegisterMethods
         public void Register(object myObject)
@@ -37,21 +38,6 @@ namespace EventBroker
             }
         }
 
-        private EventTopic GetCreateTopic(EventAttribute attribute)
-        {
-            EventTopic topic;
-            if (!topics.ContainsKey(attribute.TopicName))
-            {
-                topic = new EventTopic(attribute.TopicName);
-                topics.Add(attribute.TopicName, topic);
-            }
-            else
-            {
-                topic = topics[attribute.TopicName];
-            }
-            return topic;
-        }
-
         private static IEnumerable<MemberInfo> GetMembersWithAttribute<TAttribute>(MemberInfo[] members) where TAttribute : Attribute
         {
             var filteredMembers = from member in members
@@ -63,7 +49,7 @@ namespace EventBroker
         #region EditingOptions
         private void AddTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
         {
-            EventTopic topic = GetCreateTopic(attribute);
+            EventTopic topic = topicNameTopicPairs.GetOrCreateTopic(attribute.TopicName);
             switch (member)
             {
                 case MethodInfo myMethod:
@@ -72,7 +58,7 @@ namespace EventBroker
                 case EventInfo myEvent:
                     //MethodInfo method = GetType().GetMethod(nameof(OnEventIsPublished) ,BindingFlags.NonPublic | BindingFlags.Instance);
                     //Delegate handler = Delegate.CreateDelegate(myEvent.EventHandlerType, myObject, method);
-                    EventHandler handler = (sender, args) => OnEventIsPublished(sender, args, topic.TopicName);
+                    EventHandler handler = (sender, args) => OnEventIsFired(sender, args, topic.TopicName);
                     myEvent.AddEventHandler(myObject, handler);
                     break;
             }
@@ -81,21 +67,21 @@ namespace EventBroker
         private void RemoveTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
         {
             EventTopic topic;
-            if (member is MethodInfo method && topics.TryGetValue(attribute.TopicName, out topic))
+            if (member is MethodInfo method && topicNameTopicPairs.TryGetValue(attribute.TopicName, out topic))
             {
                 topic.RemoveAllSubscriptionsOf(myObject);
                 if (topic.CountSubscriptions() == 0)
-                    topics.Remove(attribute.TopicName);
+                    topicNameTopicPairs.Remove(attribute.TopicName);
             }
         }
         #endregion
         #endregion
 
         #region EventRaisedMethods
-        private void OnEventIsPublished(object sender, EventArgs args, string topicName)
+        private void OnEventIsFired(object sender, EventArgs args, string topicName)
         {
             EventTopic topic;
-            if (topics.TryGetValue(topicName, out topic))
+            if (topicNameTopicPairs.TryGetValue(topicName, out topic))
             {
                 topic.Fire(sender, args);
             }
