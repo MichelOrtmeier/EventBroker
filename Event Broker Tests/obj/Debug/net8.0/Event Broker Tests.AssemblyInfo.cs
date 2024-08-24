@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Event Broker Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9874b4d24541459c6bcb3119c092e4d16d779b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fad5a29d9cfb1013aef16117310bacc2ade28c44")]
 [assembly: System.Reflection.AssemblyProductAttribute("Event Broker Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Event Broker Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
