@@ -1,0 +1,12 @@
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\EventBroker.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\EventBroker.AssemblyInfoInputs.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\EventBroker.AssemblyInfo.cs
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\EventBroker.csproj.CoreCompileInputs.cache
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\EventBroker.sourcelink.json
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\bin\Debug\net8.0\EventBroker.deps.json
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\bin\Debug\net8.0\EventBroker.dll
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\bin\Debug\net8.0\EventBroker.pdb
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\EventBroker.dll
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\refint\EventBroker.dll
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\EventBroker.pdb
+D:\Programmieren\C#\Anwendungen\Bibliotheken\EventBroker - Kopie\EventBroker\obj\Debug\net8.0\ref\EventBroker.dll

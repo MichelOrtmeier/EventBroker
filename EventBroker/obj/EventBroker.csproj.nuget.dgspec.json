@@ -1,35 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\EventBroker.csproj": {}
+    "H:\\EventBroker - Kopie\\EventBroker\\EventBroker.csproj": {}
   },
   "projects": {
-    "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\EventBroker.csproj": {
+    "H:\\EventBroker - Kopie\\EventBroker\\EventBroker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\EventBroker.csproj",
+        "projectUniqueName": "H:\\EventBroker - Kopie\\EventBroker\\EventBroker.csproj",
         "projectName": "EventBroker",
-        "projectPath": "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\EventBroker.csproj",
-        "packagesPath": "C:\\Users\\morti\\.nuget\\packages\\",
-        "outputPath": "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\obj\\",
+        "projectPath": "H:\\EventBroker - Kopie\\EventBroker\\EventBroker.csproj",
+        "packagesPath": "C:\\Users\\Morti\\.nuget\\packages\\",
+        "outputPath": "H:\\EventBroker - Kopie\\EventBroker\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\morti\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Morti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -37,11 +34,22 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

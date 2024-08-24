@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vzHefbenbVanMnCbwEIuFAHRtJojrkpDMyofF85quVCV8UskIVJt+zek074o5CLokdxboKDQc8LS8kmusuwMJg==",
+  "dgSpecHash": "ndLS+AoYxTQ=",
   "success": true,
-  "projectFilePath": "D:\\Programmieren\\C#\\Anwendungen\\Bibliotheken\\EventBroker\\EventBroker\\EventBroker.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "H:\\EventBroker - Kopie\\EventBroker\\EventBroker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Morti\\.nuget\\packages\\nunit\\4.1.0\\nunit.4.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

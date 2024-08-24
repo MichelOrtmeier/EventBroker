@@ -1,105 +1,87 @@
-﻿using System.Reflection;
-using EventBroker.EventAttributes;
+﻿using EventBroker.EventAttributes;
+using EventBroker.MethodInstances;
+using System.Reflection;
 
 namespace EventBroker
 {
-    delegate void EditTopicMember(object myObject, MemberInfo member, EventAttribute attribute);
     public class Broker
     {
-        Dictionary<string, EventTopic> topics = new Dictionary<string, EventTopic>();
+        Dictionary<string, List<MethodInstance>> topics = new Dictionary<string, List<MethodInstance>>();
 
-        #region RegisterMethods
-        public void Register(object myObject)
+        public void Register(object instance)
         {
-            Type myObjectType = myObject.GetType();
-            EditTopics(myObjectType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly), myObject, AddTopicMember);
-            EditTopics(myObjectType.GetEvents(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly), myObject, AddTopicMember);
+            RegisterInstanceMethods(instance);
+            RegisterInstanceEvents(instance);
         }
-
-        public void Unregister(object myObject)
+        
+        private void RegisterInstanceMethods(object instance)
         {
-            Type myObjectType = myObject.GetType();
-            EditTopics(myObjectType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly), myObject, RemoveTopicMember);
-        }
-        #endregion
-
-        #region EditTopics
-        private void EditTopics(MemberInfo[] members, object myObject, EditTopicMember action)
-        {
-            var attributedMembers = GetMembersWithAttribute<EventAttribute>(members);
-
-            foreach (MemberInfo member in attributedMembers)
+            MethodInstance[] attributedMethods = instance.GetMethodInstancesWithAttribute<EventSubscriptionAttribute>();
+            foreach (MethodInstance method in attributedMethods)
             {
-                foreach (EventAttribute attribute in member.GetCustomAttributes<EventAttribute>(true))
-                {
-                    action(myObject, member, attribute);
-                }
+                RegisterAttributedMethod(method);
             }
         }
 
-        private EventTopic GetCreateTopic(EventAttribute attribute)
+        private void RegisterAttributedMethod(MethodInstance method)
         {
-            EventTopic topic;
-            if (!topics.ContainsKey(attribute.TopicName))
+            EventSubscriptionAttribute[] attributes = method.Method.GetCustomAttributes<EventSubscriptionAttribute>()
+                                                        .ToArray();
+            foreach (EventSubscriptionAttribute attribute in attributes)
             {
-                topic = new EventTopic(attribute.TopicName);
-                topics.Add(attribute.TopicName, topic);
-            }
-            else
-            {
-                topic = topics[attribute.TopicName];
-            }
-            return topic;
-        }
-
-        private static IEnumerable<MemberInfo> GetMembersWithAttribute<TAttribute>(MemberInfo[] members) where TAttribute : Attribute
-        {
-            var filteredMembers = from member in members
-                                  where member.GetCustomAttributes<TAttribute>(true).Count() > 0
-                                  select member;
-            return filteredMembers;
-        }
-
-        #region EditingOptions
-        private void AddTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
-        {
-            EventTopic topic = GetCreateTopic(attribute);
-            switch (member)
-            {
-                case MethodInfo myMethod:
-                    topic.AddSubscription(myMethod, myObject);
-                    break;
-                case EventInfo myEvent:
-                    //MethodInfo method = GetType().GetMethod(nameof(OnEventIsPublished) ,BindingFlags.NonPublic | BindingFlags.Instance);
-                    //Delegate handler = Delegate.CreateDelegate(myEvent.EventHandlerType, myObject, method);
-                    EventHandler handler = (sender, args) => OnEventIsPublished(sender, args, topic.TopicName);
-                    myEvent.AddEventHandler(myObject, handler);
-                    break;
+                AddTopicByName(attribute.TopicName);
+                topics[attribute.TopicName].AddWithoutDuplicating(method);
             }
         }
 
-        private void RemoveTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
+        private void AddTopicByName(string topicName)
         {
-            EventTopic topic;
-            if (member is MethodInfo method && topics.TryGetValue(attribute.TopicName, out topic))
-            {
-                topic.RemoveAllSubscriptionsOf(myObject);
-                if (topic.CountSubscriptions() == 0)
-                    topics.Remove(attribute.TopicName);
-            }
+            if (!topics.ContainsKey(topicName))
+                topics.Add(topicName, new List<MethodInstance>());
         }
-        #endregion
-        #endregion
 
-        #region EventRaisedMethods
-        private void OnEventIsPublished(object sender, EventArgs args, string topicName)
+        private void RegisterInstanceEvents(object instance)
         {
-            EventTopic topic;
-            if (topics.TryGetValue(topicName, out topic))
+            EventInfo[] attributedEvents = instance.GetEventsWithAttribute<EventPublicationAttribute>();
+            foreach (EventInfo myEvent in attributedEvents)
             {
-                topic.Fire(sender, args);
+                RegisterInstanceEvent(instance, myEvent);
             }
         }
-        #endregion
+
+        private void RegisterInstanceEvent(object instance, EventInfo myEvent)
+        {
+            string topicName = myEvent.GetCustomAttribute<EventPublicationAttribute>().TopicName;//Attribute müssen zweimal gesucht werden
+            AddTopicByName(topicName);
+            EventHandler handler = (sender, args) => new TopicFirer(topics[topicName], sender, args).Fire();
+            myEvent.AddEventHandler(instance, handler);
+        }
+
+        public void UnregisterSubscriptionsOfInstance(object instance)
+        {
+            MethodInstance[] methods = instance.GetMethodInstancesWithAttribute<EventSubscriptionAttribute>();
+            foreach (MethodInstance method in methods)
+            {
+                UnregisterSubscriptionsOfMethodInstance(method);
+            }
+        }
+
+        private void UnregisterSubscriptionsOfMethodInstance(MethodInstance subscriber)
+        {
+            EventSubscriptionAttribute[] attributes = subscriber.Method.GetCustomAttributes<EventSubscriptionAttribute>().ToArray();
+            foreach (EventSubscriptionAttribute attribute in attributes)
+            {
+                UnregisterSubscriptionOfMethodInstance(subscriber, attribute);
+            }
+        }
+
+        private void UnregisterSubscriptionOfMethodInstance(MethodInstance method, EventSubscriptionAttribute attribute)
+        {
+            List<MethodInstance> topic;
+            if (topics.TryGetValue(attribute.TopicName, out topic))
+            {
+                topic.Remove(method);
+            }
+        }
     }
 }
