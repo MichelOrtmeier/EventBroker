@@ -1,14 +1,9 @@
 ﻿using EventBroker.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EventBroker.MethodInstances
 {
-    internal static class MethodInstanceFactory
+    internal static partial class MethodInstanceFactory
     {
         public static MethodInstance CreateMethodInstance(object instance, MethodInfo method)
         {
@@ -19,37 +14,6 @@ namespace EventBroker.MethodInstances
             else
             {
                 return new MethodInstanceWithoutParameters(instance, method);
-            }
-        }
-
-        private class MethodInstanceWithoutParameters : MethodInstance
-        {
-            public MethodInstanceWithoutParameters(object instance, MethodInfo method) : base(instance, method)
-            {
-            }
-
-            public override void Invoke(object[] parameters)
-            {
-                Method.Invoke(Instance, null);
-            }
-        }
-
-        private class MethodInstanceWithParameters : MethodInstance
-        {
-            public MethodInstanceWithParameters(object instance, MethodInfo method) : base(instance, method)
-            {
-            }
-
-            public override void Invoke(object[] parameters)
-            {
-                if (parameters.ArePassableToMethod(Method))
-                {
-                    Method.Invoke(Instance, parameters);
-                }
-                else
-                {
-                    throw new ArgumentException($"The passed parameters did not match the required parameters of {Method.Name}.");
-                }
             }
         }
     }

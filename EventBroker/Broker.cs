@@ -1,28 +1,27 @@
-﻿using System.Reflection;
-using EventBroker.EventAttributes;
-using EventBroker.Extensions;
+﻿using EventBroker.EventAttributes;
+using EventBroker.MethodInstances;
+using System.Reflection;
 
 namespace EventBroker
 {
-    delegate void EditTopicMember(object myObject, MemberInfo member, EventAttribute attribute);
     public class Broker
     {
-        Dictionary<string, EventTopic> topicNameTopicPairs = new Dictionary<string, EventTopic>();
+        Dictionary<string, EventTopic> topics = new Dictionary<string, EventTopic>();
 
-        #region RegisterMethods
-        public void Register(object myObject)
+        public void Register(object instance)
         {
-            Type myObjectType = myObject.GetType();
-            EditTopics(myObjectType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly), myObject, AddTopicMember);
-            EditTopics(myObjectType.GetEvents(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly), myObject, AddTopicMember);
+            RegisterInstanceMethods(instance);
+            RegisterInstanceEvents(instance);
         }
-
-        public void Unregister(object myObject)
+        
+        private void RegisterInstanceMethods(object instance)
         {
-            Type myObjectType = myObject.GetType();
-            EditTopics(myObjectType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly), myObject, RemoveTopicMember);
+            MethodInstance[] attributedMethods = instance.GetMethodInstancesWithAttribute<EventSubscriptionAttribute>();
+            foreach (MethodInstance method in attributedMethods)
+            {
+                RegisterAttributedMethod(method);
+            }
         }
-        #endregion
 
         #region EditTopics
         private void EditTopics(MemberInfo[] members, object myObject, EditTopicMember action)
@@ -38,18 +37,32 @@ namespace EventBroker
             }
         }
 
-        private static IEnumerable<MemberInfo> GetMembersWithAttribute<TAttribute>(MemberInfo[] members) where TAttribute : Attribute
+        private EventTopic GetCreateTopic(EventAttribute attribute)
         {
-            var filteredMembers = from member in members
-                                  where member.GetCustomAttributes<TAttribute>(true).Count() > 0
-                                  select member;
-            return filteredMembers;
+            EventTopic topic;
+            if (!topics.ContainsKey(attribute.TopicName))
+            {
+                topic = new EventTopic(attribute.TopicName);
+                topics.Add(attribute.TopicName, topic);
+            }
+            else
+            {
+                topic = topics[attribute.TopicName];
+            }
+            return topic;
         }
 
-        #region EditingOptions
-        private void AddTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
+        private void RegisterInstanceEvent(object instance, EventInfo myEvent)
         {
-            EventTopic topic = topicNameTopicPairs.GetOrCreateTopic(attribute.TopicName);
+            string topicName = myEvent.GetCustomAttribute<EventPublicationAttribute>().TopicName;//Attribute müssen zweimal gesucht werden
+            AddTopicByName(topicName);
+            EventHandler handler = (sender, args) => new TopicFirer(topics[topicName], sender, args).Fire();
+            myEvent.AddEventHandler(instance, handler);
+        }
+
+        public void UnregisterSubscriptionsOfInstance(object instance)
+        {
+            EventTopic topic = GetCreateTopic(attribute);
             switch (member)
             {
                 case MethodInfo myMethod:
@@ -58,34 +71,31 @@ namespace EventBroker
                 case EventInfo myEvent:
                     //MethodInfo method = GetType().GetMethod(nameof(OnEventIsPublished) ,BindingFlags.NonPublic | BindingFlags.Instance);
                     //Delegate handler = Delegate.CreateDelegate(myEvent.EventHandlerType, myObject, method);
-                    EventHandler handler = (sender, args) => OnEventIsFired(sender, args, topic.TopicName);
+                    EventHandler handler = (sender, args) => OnEventIsPublished(sender, args, topic.TopicName);
                     myEvent.AddEventHandler(myObject, handler);
                     break;
             }
         }
 
-        private void RemoveTopicMember(object myObject, MemberInfo member, EventAttribute attribute)
+        private void UnregisterSubscriptionsOfMethodInstance(MethodInstance subscriber)
         {
             EventTopic topic;
-            if (member is MethodInfo method && topicNameTopicPairs.TryGetValue(attribute.TopicName, out topic))
+            if (member is MethodInfo method && topics.TryGetValue(attribute.TopicName, out topic))
             {
                 topic.RemoveAllSubscriptionsOf(myObject);
                 if (topic.CountSubscriptions() == 0)
-                    topicNameTopicPairs.Remove(attribute.TopicName);
+                    topics.Remove(attribute.TopicName);
             }
         }
-        #endregion
-        #endregion
 
         #region EventRaisedMethods
-        private void OnEventIsFired(object sender, EventArgs args, string topicName)
+        private void OnEventIsPublished(object sender, EventArgs args, string topicName)
         {
             EventTopic topic;
-            if (topicNameTopicPairs.TryGetValue(topicName, out topic))
+            if (topics.TryGetValue(topicName, out topic))
             {
-                topic.Fire(sender, args);
+                topic.Remove(method);
             }
         }
-        #endregion
     }
 }
