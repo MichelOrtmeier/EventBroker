@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C56BA668-19B2-4520-A976-5046D5A893E0}|Test\\Test.csproj|c:\\users\\morti\\programmieren\\c#\\anwendungen\\konsole\\eventbroker\\test\\publication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C56BA668-19B2-4520-A976-5046D5A893E0}|Test\\Test.csproj|solutionrelative:test\\publication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|c:\\users\\morti\\programmieren\\c#\\anwendungen\\konsole\\eventbroker\\eventbroker\\broker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|solutionrelative:eventbroker\\broker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|c:\\users\\morti\\programmieren\\c#\\anwendungen\\konsole\\eventbroker\\eventbroker\\extensions\\dictionaryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|solutionrelative:eventbroker\\extensions\\dictionaryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|c:\\users\\morti\\programmieren\\c#\\anwendungen\\konsole\\eventbroker\\eventbroker\\extensions\\methodinfoparameterextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|solutionrelative:eventbroker\\extensions\\methodinfoparameterextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|c:\\users\\morti\\programmieren\\c#\\anwendungen\\konsole\\eventbroker\\eventbroker\\methodinstances\\methodinstance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|solutionrelative:eventbroker\\methodinstances\\methodinstance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|c:\\users\\morti\\programmieren\\c#\\anwendungen\\konsole\\eventbroker\\eventbroker\\methodinstances\\methodinstancecomparer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|solutionrelative:eventbroker\\methodinstances\\methodinstancecomparer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|c:\\users\\morti\\programmieren\\c#\\anwendungen\\konsole\\eventbroker\\eventbroker\\methodinstances\\methodinstancefactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44B02A0E-3C73-4E41-AA06-AC9054FDE470}|EventBroker\\EventBroker.csproj|solutionrelative:eventbroker\\methodinstances\\methodinstancefactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,8 +18,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Publication.cs",
+              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\Test\\Publication.cs",
+              "RelativeDocumentMoniker": "Test\\Publication.cs",
+              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\Test\\Publication.cs",
+              "RelativeToolTip": "Test\\Publication.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T15:48:32.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Broker.cs",
+              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Broker.cs",
+              "RelativeDocumentMoniker": "EventBroker\\Broker.cs",
+              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Broker.cs",
+              "RelativeToolTip": "EventBroker\\Broker.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T15:45:31.198Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -43,79 +53,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DictionaryExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Extensions\\DictionaryExtensions.cs",
-              "RelativeDocumentMoniker": "EventBroker\\Extensions\\DictionaryExtensions.cs",
-              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Extensions\\DictionaryExtensions.cs",
-              "RelativeToolTip": "EventBroker\\Extensions\\DictionaryExtensions.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-08-08T15:10:57.755Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MethodInstanceFactory.cs",
-              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\MethodInstances\\MethodInstanceFactory.cs",
-              "RelativeDocumentMoniker": "EventBroker\\MethodInstances\\MethodInstanceFactory.cs",
-              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\MethodInstances\\MethodInstanceFactory.cs",
-              "RelativeToolTip": "EventBroker\\MethodInstances\\MethodInstanceFactory.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAmwCwAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-07-22T15:18:36.081Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MethodInstanceComparer.cs",
-              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\MethodInstances\\MethodInstanceComparer.cs",
-              "RelativeDocumentMoniker": "EventBroker\\MethodInstances\\MethodInstanceComparer.cs",
-              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\MethodInstances\\MethodInstanceComparer.cs",
-              "RelativeToolTip": "EventBroker\\MethodInstances\\MethodInstanceComparer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-07-22T15:14:35.951Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MethodInstance.cs",
-              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\MethodInstances\\MethodInstance.cs",
-              "RelativeDocumentMoniker": "EventBroker\\MethodInstances\\MethodInstance.cs",
-              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\MethodInstances\\MethodInstance.cs",
-              "RelativeToolTip": "EventBroker\\MethodInstances\\MethodInstance.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-07-22T14:52:04.312Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MethodInfoParameterExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Extensions\\MethodInfoParameterExtensions.cs",
-              "RelativeDocumentMoniker": "EventBroker\\Extensions\\MethodInfoParameterExtensions.cs",
-              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Extensions\\MethodInfoParameterExtensions.cs",
-              "RelativeToolTip": "EventBroker\\Extensions\\MethodInfoParameterExtensions.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-07-22T14:28:42.481Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Broker.cs",
-              "DocumentMoniker": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Broker.cs",
-              "RelativeDocumentMoniker": "EventBroker\\Broker.cs",
-              "ToolTip": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\EventBroker\\Broker.cs",
-              "RelativeToolTip": "EventBroker\\Broker.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAB4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-06-17T20:36:19.659Z",
-              "EditorCaption": ""
             }
           ]
         }

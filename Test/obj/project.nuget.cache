@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "HNnlVHuC2MU=",
-  "success": true,
+  "dgSpecHash": "vAu+8gKdebQ=",
+  "success": false,
   "projectFilePath": "C:\\Users\\Morti\\Programmieren\\C#\\Anwendungen\\Konsole\\EventBroker\\Test\\Test.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project EventBroker is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project EventBroker supports: net8.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "EventBroker",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

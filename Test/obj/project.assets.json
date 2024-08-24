@@ -4,7 +4,7 @@
     "net6.0": {
       "EventBroker/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": "Unsupported,Version=v0.0",
         "compile": {
           "bin/placeholder/EventBroker.dll": {}
         },
@@ -84,13 +84,19 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project EventBroker is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project EventBroker supports: net8.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "EventBroker",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
